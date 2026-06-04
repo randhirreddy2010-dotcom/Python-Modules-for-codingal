@@ -1,0 +1,13 @@
+import random
+playing = True
+number = str(random.randint(0,9))
+print("I will generate a number from 0-9, u have to guess than number one digit at a time")
+print("The game ends when u get 1 hero")
+while playing:
+    guess = input("Give me ur best guess, \n" )
+    if guess == number:
+        print("You win the game")
+        print("the number was", number)
+        break
+    else:
+        print("The guess was wrong! Try again \n")
