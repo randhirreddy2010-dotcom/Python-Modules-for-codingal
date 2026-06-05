@@ -1,0 +1,11 @@
+import math
+angle_degrees = float(input("Enter the angle in degrees: "))
+angle_radians = math.radians(angle_degrees)
+# Calculate sin, cos, and tan values
+sin_value = math.sin(angle_radians)
+cos_value = math.cos(angle_radians)
+tan_value = math.tan(angle_radians)
+print(f"\nResults for {angle_degrees}°:")
+print(f"Sin: {round(sin_value, 4)}")
+print(f"Cos: {round(cos_value, 4)}")
+print(f"Tan: {round(tan_value, 4)}")
