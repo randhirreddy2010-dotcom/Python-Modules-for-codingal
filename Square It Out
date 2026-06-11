@@ -1,0 +1,13 @@
+import math
+start = int(input("Enter start:"))
+end = int(input("Enter end:"))
+even_squares = []
+odd_squares = []
+for num in range(start, end+1):
+    sq = int(math.pow(num,2))
+    if sq%2==0:
+        even_squares.append(sq)
+    else:
+        odd_squares.append(sq)
+print("Even_squares:", even_squares)
+print("Odd_squares:", odd_squares)
