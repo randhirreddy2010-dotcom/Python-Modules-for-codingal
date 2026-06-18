@@ -1,0 +1,12 @@
+def calculate_tuple_product(numbers_tuple):
+    product = int(input("Enter the product number:"))
+    
+    
+    for num in numbers_tuple:
+        product *= num
+
+    return product
+tuple = (14,28,29,30,112,32,46,87)
+result = calculate_tuple_product(tuple)
+print("The given tuple is:", tuple)
+print("The product of all numbers is:", result)
