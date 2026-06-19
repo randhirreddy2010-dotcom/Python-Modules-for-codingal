@@ -1,0 +1,8 @@
+print({1,2,3})
+print({1.0, "Hello", (1,2,3)})
+print({1,2,3,4,3,2})
+print(set([1,2,3,2]))
+s = {0,1,3,4,5}
+print("Original:", s)
+s.pop()
+print("After pop:", s)
