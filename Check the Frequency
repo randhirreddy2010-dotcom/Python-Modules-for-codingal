@@ -1,0 +1,5 @@
+test_dict = {'a': 1, 'b': 2, 'c': 1, 'd': 3, 'e': 1}
+val_to_check = 1
+
+frequency = list(test_dict.values()).count(val_to_check)
+print(f"Frequency of {val_to_check}: {frequency}")
