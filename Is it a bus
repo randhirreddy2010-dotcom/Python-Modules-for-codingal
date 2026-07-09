@@ -1,0 +1,9 @@
+class vehicle:
+    def __init__(self. name, max_Speed, mileage):
+        self.name = name
+        self.max_Speed = max_Speed
+        self.mileage = mileage
+class Bus(vehicle):
+    pass
+School_bus = Bus("School Volvo", 180, 20)
+print("Vehicle Name":School_bus.name, "Speed":School_bus.max_Speed, "Mileage":School_bus.mileage)
