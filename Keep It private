@@ -1,0 +1,10 @@
+class myClass:
+    _privateVar = 27
+    def __privateMeth(Self):
+        print("I am inside my class")
+    def hello(Self):
+        print("Private variable value:", myClass.__privateVar)
+foo = myClass()
+foo.hello()
+foo.__privateMeth       
+
