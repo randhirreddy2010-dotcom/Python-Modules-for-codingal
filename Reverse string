@@ -1,0 +1,26 @@
+class StringReverse:
+    def __init__(self, text: str):
+        """Initializes the class with the input string."""
+        self.text = text
+
+    def reverse_words(self) -> str:
+        """Reverses the string word by word."""
+       
+        words = self.text.split()
+        
+        
+        reversed_words = words[::-1]
+        
+       
+        return " ".join(reversed_words)
+
+
+if __name__ == "__main__":
+    
+    reverser = StringReverse("Hello World from Python")
+    
+   
+    result = reverser.reverse_words()
+    
+    print("Original:", reverser.text)
+    print("Reversed:", result)
