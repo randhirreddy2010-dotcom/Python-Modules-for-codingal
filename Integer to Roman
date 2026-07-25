@@ -1,0 +1,13 @@
+import roman
+
+class RomanConverter:
+    def convert_number(self, num):
+        
+        return roman.toRoman(num)
+
+my_converter = RomanConverter()
+
+user_number = int(input("Enter an integer between 1 and 3999: "))
+
+result = my_converter.convert_number(user_number)
+print(f"The Roman numeral is: {result}")
