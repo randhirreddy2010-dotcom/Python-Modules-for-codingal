@@ -1,0 +1,43 @@
+import pygame
+import random
+pygame.init()
+SC, BC = pygame.USEREVENT +1, pygame.USEREVENT +2
+bg = [(0,0,255), (100,150,255), (0,0,150)]
+sp = [(255,255,0), (255,0,255), (255,165,0), (255,255,255)]
+img = pygame.Surface((30,20))
+img.fill(random.choice(sp))
+r = img.get_rect(topleft=(100,100))
+v = [1,1]
+scr = pygame.display.set_mode((500,400))
+b = random.choice(bg)
+c = pygame.time.Clock()
+run = True
+while True:
+    for e in pygame.event.get():
+        if e.type == pygame.QUIT:
+            run = False
+        elif e.type == SC:
+            img.fill(random.choice(sp))
+        elif e.type == BC:
+            b = random.choice(bg)
+    r.move_ip(v)
+    if r.left <= 0 or r.right >= 500:
+        v[0] *= -1
+        pygame.event.post(pygame.event.Event(SC))
+        pygame.event.post(pygame.event.Event(BC))
+    if r.top <=0 or r.bottom >=400:
+        v[1] *= -1
+        pygame.event.post(pygame.event.Event(SC))
+        pygame.event.post(pygame.event.Event(BC))
+    scr.fill(b)
+    scr.blit(img,r)
+    pygame.display.flip()
+    c.tick(240)
+pygame.QUIT()
+
+    
+
+
+        
+
+     
