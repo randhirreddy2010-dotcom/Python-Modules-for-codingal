@@ -1,0 +1,80 @@
+import pygame
+BOUNDARY_EVENT = pygame.USEREVENT + 1
+class Car(pygame.sprite.Sprite):
+    def __init__(self, color, width, height, screen_width, screen_height):
+        super().__init__()
+        self.image = pygame.Surface([width, height])
+        self.image.fill(color)
+        self.rect = self.image.get_rect()
+        self.rect.x = 30
+        self.rect.y = 30
+        self.speed = 3
+        self.screen_width = screen_width
+        self.screen_height = screen_height
+        self.last_wall = None
+    def update(self):
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_LEFT]: self.rect.x -= self.speed
+        if keys[pygame.K_RIGHT]: self.rect.x += self.speed
+        if keys[pygame.K_UP]: self.rect.y -= self.speed
+        if keys[pygame.K_DOWN]: self.rect.y += self.speed
+        self.rect.x = max(0, min(self.rect.x, self.screen_width - self.rect.width))
+        self.rect.y = max(0, min(self.rect.y, self.screen_height - self.rect.height))
+        current_wall = None
+        if self.rect.left == 0:
+            current_wall = 'left'
+        elif self.rect.right == self.screen_width:
+            current_wall = 'right'
+        elif self.rect.top == 0:
+            current_wall = 'top'
+        elif self.rect.bottom == self.screen_height:
+            current_wall = 'bottom'
+        if current_wall and current_wall != self.last_wall:
+            event = pygame.event.Event(BOUNDARY_EVENT, {"side": current_wall})
+            pygame.event.post(event)       
+        self.last_wall = current_wall
+    def change_color(self, new_color):
+        self.image.fill(new_color)
+def main():
+    pygame.init()
+    screen_width, screen_height = 500, 500
+    screen = pygame.display.set_mode((screen_width, screen_height))
+    pygame.display.set_caption('Smart Traffic Signal Simulator')
+    colors = {
+        'red': pygame.Color('red'),
+        'green': pygame.Color('green'),
+        'blue': pygame.Color('blue'),
+        'yellow': pygame.Color('yellow'),
+        'white': pygame.Color('white')
+    }    
+    traffic_signal_color = colors['white']   
+    all_sprites = pygame.sprite.Group()
+    car = Car(colors['white'], 60, 60, screen_width, screen_height)
+    all_sprites.add(car)
+    clock = pygame.time.Clock()
+    done = False
+    while not done:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                done = True
+            if event.type == BOUNDARY_EVENT:
+                if event.side == 'left':
+                    new_color = colors['blue']
+                elif event.side == 'right':
+                    new_color = colors['yellow']
+                elif event.side == 'top':
+                    new_color = colors['red']
+                elif event.side == 'bottom':
+                    new_color = colors['green']
+                car.change_color(new_color)
+                traffic_signal_color = new_color
+        all_sprites.update()
+        screen.fill((0, 0, 0))
+        pygame.draw.circle(screen, traffic_signal_color, (screen_width // 2, screen_height // 2), 4)
+        all_sprites.draw(screen)
+        pygame.display.flip()
+        clock.tick(90)
+    pygame.quit()
+
+if __name__ == "__main__":
+    main()
