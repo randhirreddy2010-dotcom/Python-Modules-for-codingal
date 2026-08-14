@@ -1,0 +1,16 @@
+from tkinter import *
+from datetime import date
+root = Tk()
+root.title = ("Getting Started")
+root.geometry = ("400x300")
+Label(root, text = "Hey there", fg = "white", bg="#072F5F").pack()
+Label(root, text = "Full name", bg = "#3985D3").pack()
+name = Entry(root)
+name.pack()
+text = Text(root, height = 3)
+text.pack()
+def display():
+    text.insert(END, f"Hello, {name.get()}!")
+    text.insert(END, f"Welcome to the application!\nToday's date is: {date.today()}")
+Button(root, text = "begin", command=display, bg = "#1261A0", fg = "white").pack()
+root.mainloop()
