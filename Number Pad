@@ -1,0 +1,16 @@
+from tkinter import *
+root = Tk()
+root.title("Number Pad")
+root.geometry("250x300")
+nums = [[9,8,7], [6,5,4], [3,2,1],  ["#", 0, "=", "*"]]
+for i, row in enumerate(nums):
+    root.rowconfigure(i, weight=1)
+    for j, num in enumerate(row):
+        root.columnconfigure(j, weight=1)
+        Label(root, text=num, bg = "#d0d9ff", relief = SUNKEN, borderwidth = 1).grid(
+            row=i, column=j, padx = 3, pady = 3, sticky="nsew")
+root.mainloop()
+
+        
+
+
