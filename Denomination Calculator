@@ -1,0 +1,34 @@
+from tkinter import*
+from tkinter import messagebox
+from PIL import Image, ImageTk
+root =  Tk()
+root.geometry("650x400")
+root.configure(bg="lightblue")
+img = ImageTk.PhotoImage(Image.open("denomination.jpg").resize((300, 300)))
+Label(root, image=img, bg="lightblue").place(x=180, y=20)
+Label(root, text="Denomination Calculator", bg="lightblue").place(x=240, y=150)
+Label(root, text="Welcome to Denomination Calculator", bg="lightblue").place(relx=0.5, rely=0.9, anchor=CENTER)
+def topwin():
+    t = Toplevel(root)
+    t.geometry("600x350")
+    t.configure(bg="lightgrey")
+    Label(t, text="Amount", bg = "light grey").place(x=250, y=50)
+    en = Entry(t)
+    en.place(x=200, y=80)
+    ts = [Entry(t) for i in range(3)]
+    for i, v in enumerate((2000, 500, 200)):
+        Label(t, text=f"{v} Rs", bg="lightgrey").place(x=150, y=120 + i * 40)
+        ts[i].place(x=250, y=120 + i * 40)
+    def calc():
+        try:
+            a= int(en.get())
+            for i, v in enumerate((2000, 500, 200)):
+                count, a = divmod(a, v)
+                ts[i].delete(0, END)
+                ts[i].insert(0, a//v)
+                a = a % v
+        except ValueError:
+            messagebox.showerror("Invalid amount", "Please enter a valid number.")
+        Button(t, text="Calculate", command=calc, bg="brown", fg="white").place(x=250, y=250)
+Button(root, text="Open Calculator", command=lambda: messagebox.showinfo("alert", "Proceed?") == "ok" and topwin(), bg="lightgreen", fg="black").place(x=250, y=350)
+root.mainloop()
