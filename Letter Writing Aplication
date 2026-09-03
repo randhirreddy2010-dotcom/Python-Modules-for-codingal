@@ -1,0 +1,42 @@
+import tkinter as tk
+from tkinter.filedialog import askopenfilename, asksaveasfilename
+def open_letter():
+    filepath = askopenfilename(
+        filetypes=[("Text Files", "*.txt"), ("All Files", "*.*")]
+    )
+    if not filepath:
+        return
+    txt_editor.delete(1.0, tk.END)
+    with open(filepath, "r") as input_file:
+        text = input_file.read()
+        txt_editor.insert(tk.END, text)
+    root.title(f"Letter Writer - {filepath}")
+def save_letter():
+    filepath = asksaveasfilename(
+        defaultextension="txt",
+        filetypes=[("Text Files", "*.txt"), ("All Files", "*.*")],
+    )    
+    if not filepath:
+        return
+    with open(filepath, "w") as output_file:
+        text = txt_editor.get(1.0, tk.END)
+        output_file.write(text)       
+    root.title(f"Letter Writer - {filepath}")
+def new_letter():
+    txt_editor.delete(1.0, tk.END)
+    root.title("Letter Writer - New Letter")
+root = tk.Tk()
+root.title("Letter Writer - New Letter")
+root.rowconfigure(0, minsize=400, weight=1)
+root.columnconfigure(1, minsize=500, weight=1)
+frm_buttons = tk.Frame(root, relief=tk.RAISED, bd=2)
+frm_buttons.grid(row=0, column=0, sticky="ns")
+btn_new = tk.Button(frm_buttons, text="New Letter", command=new_letter)
+btn_new.grid(row=0, column=0, sticky="ew", padx=5, pady=5)
+btn_open = tk.Button(frm_buttons, text="Open Letter", command=open_letter)
+btn_open.grid(row=1, column=0, sticky="ew", padx=5, pady=5)
+btn_save = tk.Button(frm_buttons, text="Save As...", command=save_letter)
+btn_save.grid(row=2, column=0, sticky="ew", padx=5, pady=5)
+txt_editor = tk.Text(root, font=("Helvetica", 12), wrap=tk.WORD)
+txt_editor.grid(row=0, column=1, sticky="nsew")
+root.mainloop()
